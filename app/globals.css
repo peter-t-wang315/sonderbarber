@@ -9,6 +9,9 @@
 
   --font: var(--font-inter), system-ui, -apple-system, "Helvetica Neue", Arial,
     sans-serif;
+  /* Display face for the wordmark and headlines — see app/layout.js. */
+  --font-head: var(--font-display), var(--font-inter), "Helvetica Neue", Arial,
+    sans-serif;
 
   --maxw: 1240px;
   --pad: clamp(20px, 5vw, 64px);
@@ -76,35 +79,38 @@ img {
   margin: 0 0 20px;
 }
 
-/* Wordmark / display styling mirrors the SONDER logo:
-   heavy weight, uppercase, tight negative tracking. */
+/* Wordmark / display styling mirrors the SONDER logo: ultra-bold, extended,
+   uppercase, letters almost touching. font-stretch drives the width axis. */
 .wordmark {
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.005em;
   text-transform: uppercase;
 }
 
 h1,
 h2,
 h3 {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.02;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.005em;
+  line-height: 1.04;
   margin: 0;
   text-transform: uppercase;
 }
 
 h1 {
-  font-size: clamp(48px, 11vw, 148px);
+  font-size: clamp(38px, 8.4vw, 112px);
 }
 
 h2 {
-  font-size: clamp(34px, 6vw, 74px);
+  font-size: clamp(28px, 4.8vw, 58px);
 }
 
 h3 {
-  font-size: clamp(20px, 2.4vw, 30px);
-  letter-spacing: -0.02em;
+  font-size: clamp(18px, 2.1vw, 26px);
 }
 
 p {
@@ -203,9 +209,11 @@ p {
 }
 
 .nav__brand {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.005em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: flex-start;
@@ -839,7 +847,7 @@ body:has(.snap-page) .footer {
 }
 
 .barber h2 {
-  font-size: clamp(30px, 4.5vw, 54px);
+  font-size: clamp(26px, 3.6vw, 44px);
   margin-bottom: 24px;
 }
 
@@ -869,9 +877,10 @@ body:has(.snap-page) .footer {
 }
 
 .footer__brand {
-  font-size: clamp(48px, 10vw, 120px);
-  font-weight: 800;
-  letter-spacing: -0.045em;
+  font-size: clamp(42px, 8.5vw, 104px);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.005em;
   text-transform: uppercase;
   line-height: 0.9;
 }
