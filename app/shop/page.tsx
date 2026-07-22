@@ -9,7 +9,9 @@ export default function Shop() {
   return (
     <div className="snap-page">
       <section className="hero snap">
-        <div className="aura" />
+        <div className="aura-wrap">
+          <div className="aura" />
+        </div>
         <div className="container hero__inner">
           <p className="eyebrow hero__eyebrow">The SONDER Shop</p>
 

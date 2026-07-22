@@ -7,7 +7,9 @@ export default function Home() {
     <div className="snap-page">
       {/* HERO */}
       <section className="hero snap">
-        <div className="aura" />
+        <div className="aura-wrap">
+          <div className="aura" />
+        </div>
         <div className="container hero__inner">
           <p className="eyebrow hero__eyebrow">Toronto · Est. 2024</p>
 
@@ -49,6 +51,8 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
+
+        <div className="cue cue--quick" aria-hidden="true" />
       </section>
 
       {/* VISIT */}
