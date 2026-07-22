@@ -10,7 +10,9 @@ export const SITE = {
   instagram: "https://instagram.com",
 };
 
-export const NAV_LINKS = [
+export type NavLink = { href: string; label: string };
+
+export const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/shop", label: "Shop" },
@@ -27,10 +29,12 @@ export const NAV_LINKS = [
 // angles instead of 7 needs no code change.
 const FRAME_COUNT = 7;
 
-const frames = (slug) =>
+const frames = (slug: string) =>
   Array.from({ length: FRAME_COUNT }, (_, i) => `/frames/${slug}/${i + 1}.svg`);
 
-export const SERVICES = [
+export type Service = { title: string; price: string; frames: string[] };
+
+export const SERVICES: Service[] = [
   { title: "Signature Cut", price: "$55", frames: frames("signature-cut") },
   { title: "Skin Fade", price: "$60", frames: frames("skin-fade") },
   { title: "Beard Sculpt", price: "$35", frames: frames("beard-sculpt") },
@@ -40,7 +44,14 @@ export const SERVICES = [
 ];
 
 // Filler barber roster for the About page.
-export const BARBERS = [
+export type Barber = {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+};
+
+export const BARBERS: Barber[] = [
   {
     name: "Marcus Vale",
     role: "Founder · Master Barber",

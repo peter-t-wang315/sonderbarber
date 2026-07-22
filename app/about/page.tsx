@@ -1,7 +1,8 @@
 import { BARBERS, BOOKING_URL } from "@/lib/site";
+import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About — SONDER",
   description:
     "Meet the barbers behind SONDER — a modern Toronto barbershop built on craft, patience and swagger.",
