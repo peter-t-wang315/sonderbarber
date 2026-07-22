@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -34,13 +36,13 @@ const display = Archivo({
   display: "swap",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SONDER — A Modern Barbershop",
   description:
     "SONDER is a modern barbershop. Clean fades, sharp lines, and a room with swagger. Book your chair.",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   // Browser extensions inject attributes into the document shell before React
   // hydrates (e.g. data-__host_prefix_*-filters-channel), which React 19 reports
   // as a hydration mismatch. Suppressed on the two shell nodes only —

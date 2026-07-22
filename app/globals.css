@@ -316,8 +316,101 @@ p {
   transform: translateY(0);
 }
 
+/* Burger: three bars that fold into an X. Desktop never sees it. */
+.nav__burger {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav__burger span {
+  position: absolute;
+  left: 9px;
+  width: 22px;
+  height: 1.5px;
+  background: var(--off-white);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease;
+}
+
+.nav__burger span:nth-child(1) {
+  top: 14px;
+}
+.nav__burger span:nth-child(2) {
+  top: 20px;
+}
+.nav__burger span:nth-child(3) {
+  top: 26px;
+}
+
+.nav.is-open .nav__burger span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav.is-open .nav__burger span:nth-child(2) {
+  opacity: 0;
+}
+.nav.is-open .nav__burger span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Dropdown panel below the bar. */
+.nav__panel {
+  display: none;
+  border-top: 1px solid var(--line-soft);
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(14px);
+}
+
+.nav__panel nav {
+  display: flex;
+  flex-direction: column;
+  padding: 8px var(--pad) 28px;
+}
+
+.nav__panel a {
+  font-family: var(--font-head);
+  font-size: 30px;
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: rgba(243, 239, 230, 0.75);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 55ms + 60ms);
+}
+
+.nav__panel a[data-active="true"] {
+  color: var(--off-white);
+}
+
+.nav__panel a:last-child {
+  border-bottom: 0;
+}
+
 @media (max-width: 720px) {
   .nav__links {
+    display: none;
+  }
+
+  .nav__burger {
+    display: block;
+  }
+
+  .nav__panel:not([hidden]) {
+    display: block;
+  }
+
+  /* The pill is redundant once Book Now is in the panel. */
+  .nav__book {
     display: none;
   }
 }
@@ -331,6 +424,7 @@ html:has(.snap-page) {
 }
 
 .snap {
+  position: relative;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -359,9 +453,10 @@ body:has(.snap-page) .footer {
   scroll-snap-align: end;
 }
 
-/* Snapping fights small screens and short windows, where a panel's content
-   can exceed the viewport and become unreachable. */
-@media (max-width: 820px), (max-height: 700px) {
+/* Snapping stays on for phones — only genuinely short windows (landscape
+   handsets) turn it off, where a panel's content would exceed the viewport
+   and become unreachable. */
+@media (max-height: 700px) {
   html:has(.snap-page) {
     scroll-snap-type: none;
   }
@@ -427,8 +522,15 @@ body:has(.snap-page) .footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
   background: var(--black);
+}
+
+/* Clips the oversized aura without clipping the scroll cue. */
+.aura-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 /* Slow-drifting off-centre glow — the only thing behind the type.
@@ -544,18 +646,32 @@ body:has(.snap-page) .footer {
   animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.78s forwards;
 }
 
-/* Scroll cue: a hairline with a highlight travelling down it, on a loop. */
+/* Scroll cue: a hairline with a highlight travelling down it, on a loop.
+   It starts inside the panel and hangs past the bottom edge, so the line
+   carries the eye across the boundary into the next panel. */
 .cue {
   position: absolute;
-  bottom: 34px;
+  bottom: -54px;
   left: 50%;
+  z-index: 4;
   width: 1px;
-  height: 62px;
+  height: 122px;
   transform: translateX(-50%);
-  background: var(--line);
+  background: linear-gradient(
+    180deg,
+    rgba(243, 239, 230, 0.02),
+    rgba(243, 239, 230, 0.16) 45%,
+    rgba(243, 239, 230, 0.04)
+  );
   overflow: hidden;
   opacity: 0;
   animation: fadeUp 1s ease 1.2s forwards;
+  pointer-events: none;
+}
+
+/* Panels that reveal on scroll shouldn't wait on the load-delay. */
+.cue--quick {
+  animation-delay: 0.2s;
 }
 
 .cue::after {
@@ -577,6 +693,14 @@ body:has(.snap-page) .footer {
   }
   to {
     transform: translateY(100%);
+  }
+}
+
+/* Too tight to hang past the edge on short screens. */
+@media (max-height: 700px) {
+  .cue {
+    bottom: -32px;
+    height: 88px;
   }
 }
 
@@ -748,8 +872,8 @@ body:has(.snap-page) .footer {
 
 @media (max-width: 820px) {
   .viewer__stage {
-    height: auto;
-    width: min(92vw, 480px);
+    height: min(46vh, 400px);
+    width: auto;
   }
 
   .viewer__nav {

@@ -1,7 +1,8 @@
 import { BARBERS, BOOKING_URL } from "@/lib/site";
+import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About — SONDER",
   description:
     "Meet the barbers behind SONDER — a modern Toronto barbershop built on craft, patience and swagger.",
@@ -12,7 +13,9 @@ export default function About() {
     <div className="snap-page">
       {/* INTRO */}
       <section className="hero snap">
-        <div className="aura" />
+        <div className="aura-wrap">
+          <div className="aura" />
+        </div>
         <div className="container hero__inner">
           <p className="eyebrow hero__eyebrow">About</p>
 
@@ -61,6 +64,8 @@ export default function About() {
               Book with {b.name.split(" ")[0]}
             </a>
           </Reveal>
+
+          <div className="cue cue--quick" aria-hidden="true" />
         </section>
       ))}
 

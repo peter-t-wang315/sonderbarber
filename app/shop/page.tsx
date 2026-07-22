@@ -1,4 +1,6 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Shop — SONDER",
   description: "The SONDER shop is on its way. Grooming goods, coming soon.",
 };
@@ -7,7 +9,9 @@ export default function Shop() {
   return (
     <div className="snap-page">
       <section className="hero snap">
-        <div className="aura" />
+        <div className="aura-wrap">
+          <div className="aura" />
+        </div>
         <div className="container hero__inner">
           <p className="eyebrow hero__eyebrow">The SONDER Shop</p>
 

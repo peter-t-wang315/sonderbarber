@@ -1,13 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import { SERVICES } from "@/lib/site";
 
 // Pixels of horizontal travel per angle step. Lower = twitchier rotation.
 const DRAG_STEP = 54;
 const WHEEL_STEP = 46;
 
-const wrap = (v, n) => ((v % n) + n) % n;
+const wrap = (v: number, n: number) => ((v % n) + n) % n;
 
 /**
  * Two-level viewer.
@@ -25,8 +32,8 @@ export default function CutViewer() {
   const [frame, setFrame] = useState(0);
   const [touched, setTouched] = useState(false);
 
-  const stageRef = useRef(null);
-  const drag = useRef(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ x: number; frame: number } | null>(null);
   const wheelAcc = useRef(0);
 
   const service = SERVICES[cut];
@@ -46,14 +53,14 @@ export default function CutViewer() {
     );
   }, [cut]);
 
-  const goCut = useCallback((dir) => {
+  const goCut = useCallback((dir: number) => {
     setCut((c) => wrap(c + dir, SERVICES.length));
     setFrame(0);
     setTouched(true);
   }, []);
 
   const scrub = useCallback(
-    (steps) => {
+    (steps: number) => {
       if (!steps) return;
       setFrame((f) => wrap(f + steps, frameCount));
       setTouched(true);
@@ -67,7 +74,7 @@ export default function CutViewer() {
     const el = stageRef.current;
     if (!el) return;
 
-    const onWheel = (e) => {
+    const onWheel = (e: WheelEvent) => {
       const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
       if (!dx) return;
       e.preventDefault();
@@ -83,13 +90,13 @@ export default function CutViewer() {
     return () => el.removeEventListener("wheel", onWheel);
   }, [scrub]);
 
-  const onPointerDown = (e) => {
+  const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     drag.current = { x: e.clientX, frame };
     e.currentTarget.setPointerCapture(e.pointerId);
   };
 
-  const onPointerMove = (e) => {
+  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
     const d = drag.current;
     if (!d) return;
     const steps = Math.round((e.clientX - d.x) / DRAG_STEP);
@@ -100,7 +107,7 @@ export default function CutViewer() {
     }
   };
 
-  const endDrag = (e) => {
+  const endDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (!drag.current) return;
     drag.current = null;
     if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
@@ -108,7 +115,7 @@ export default function CutViewer() {
     }
   };
 
-  const onKeyDown = (e) => {
+  const onKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
       scrub(-1);
