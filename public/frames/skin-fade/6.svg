@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#191919"/>
+      <stop offset="1" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <radialGradient id="key" cx="0.5" cy="0.36" r="0.62">
+      <stop offset="0" stop-color="#f3efe6" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#f3efe6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4f4a41"/>
+      <stop offset="0.5" stop-color="#6f695c"/>
+      <stop offset="1" stop-color="#413c34"/>
+    </linearGradient>
+    <clipPath id="skull">
+      <ellipse cx="400" cy="430" rx="180.83" ry="210"/>
+    </clipPath>
+    <clipPath id="above-hairline">
+      <path d="M 0 0 H 800 V 334 Q 400 390.2 0 394.39 Z"/>
+    </clipPath>
+    <clipPath id="jaw">
+      <rect x="0" y="490" width="800" height="1000"/>
+    </clipPath>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#key)"/>
+
+  <!-- shoulders -->
+  <path d="M 70 1000 C 100 760, 250 698, 400 698 C 550 698, 700 760, 730 1000 Z" fill="#222120"/>
+  <!-- neck -->
+  <rect x="359.19" y="570" width="104" height="160" rx="46" fill="#37322c"/>
+
+  <!-- skull -->
+  <ellipse cx="400" cy="430" rx="180.83" ry="210" fill="url(#skin)"/>
+
+  <!-- the back of the head falls into shadow as it turns away -->
+  <g clip-path="url(#skull)">
+    <ellipse cx="282.55" cy="430" rx="144.67" ry="210" fill="#1d1b18" opacity="0.43"/>
+  </g>
+
+  <!-- ear -->
+  <g clip-path="url(#skull)">
+    <ellipse cx="321.7" cy="440" rx="17" ry="32" fill="#3f3a32" opacity="1"/>
+  </g>
+
+  <!-- brow line -->
+  <path d="M 403.95 404 Q 455.95 388 507.95 404" stroke="#2e2b26" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- eyes: near one is on the side the face is turning toward -->
+  <ellipse cx="481.95" cy="434" rx="15" ry="8" fill="#191713" opacity="0.73"/>
+  <ellipse cx="429.95" cy="434" rx="15" ry="8" fill="#191713" opacity="0.24"/>
+
+  <!-- nose: a wedge off the face plane, tip leading the turn -->
+  <path d="M 455.95 438 L 554.07 506 L 455.95 518 Z" fill="#807869" opacity="0.95"/>
+  <ellipse cx="468.07" cy="512" rx="18.33" ry="10" fill="#807869" opacity="0.9"/>
+
+  <!-- mouth -->
+  <path d="M 434.61 572 Q 471.53 582 494.61 572" stroke="#2b2823" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- beard -->
+  
+
+  <!-- hair mass sits over the skull and trails the turn -->
+  <g clip-path="url(#above-hairline)">
+    <ellipse cx="380.95" cy="411.4" rx="186.83" ry="272" fill="#ece7dc" opacity="1"/>
+  </g>
+
+  <!-- angle readout -->
+  <text x="56" y="944" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="6" fill="#f3efe6" fill-opacity="0.62">R60°</text>
+  <text x="744" y="944" text-anchor="end" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="6" fill="#f3efe6" fill-opacity="0.35">06/07</text>
+</svg>
