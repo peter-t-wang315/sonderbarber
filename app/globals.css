@@ -646,24 +646,20 @@ body:has(.snap-page) .footer {
   animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.78s forwards;
 }
 
-/* Scroll cue: a hairline with a highlight travelling down it, on a loop.
-   It starts inside the panel and hangs past the bottom edge, so the line
-   carries the eye across the boundary into the next panel. */
+/* Scroll cue: five stacked down-carets with a highlight rippling through
+   them on a loop. The stack is anchored so three sit on the current panel and
+   the lowest two spill past the bottom edge onto the next panel, carrying the
+   eye across the boundary. */
 .cue {
   position: absolute;
-  bottom: -54px;
+  bottom: -30px;
   left: 50%;
   z-index: 4;
-  width: 1px;
-  height: 122px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   transform: translateX(-50%);
-  background: linear-gradient(
-    180deg,
-    rgba(243, 239, 230, 0.02),
-    rgba(243, 239, 230, 0.16) 45%,
-    rgba(243, 239, 230, 0.04)
-  );
-  overflow: hidden;
   opacity: 0;
   animation: fadeUp 1s ease 1.2s forwards;
   pointer-events: none;
@@ -674,33 +670,60 @@ body:has(.snap-page) .footer {
   animation-delay: 0.2s;
 }
 
-.cue::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    var(--off-white),
-    transparent
-  );
-  animation: travel 2.6s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+/* Each caret is a rotated square showing two borders — a clean chevron. */
+.cue__caret {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--off-white);
+  border-bottom: 2px solid var(--off-white);
+  transform: rotate(45deg);
+  opacity: 0.22;
+  /* The bright point ripples top → bottom, so motion reads downward. Each
+     caret's peak (--peak) steps down the stack, so the glow fades as it
+     descends toward the next panel. */
+  animation: caret-ripple 2.1s cubic-bezier(0.6, 0, 0.4, 1) infinite;
 }
 
-@keyframes travel {
-  from {
-    transform: translateY(-100%);
+.cue__caret:nth-child(1) {
+  --peak: 1;
+}
+
+.cue__caret:nth-child(2) {
+  --peak: 0.66;
+  animation-delay: 0.13s;
+}
+
+.cue__caret:nth-child(3) {
+  --peak: 0.42;
+  animation-delay: 0.26s;
+}
+
+.cue__caret:nth-child(4) {
+  --peak: 0.26;
+  animation-delay: 0.39s;
+}
+
+.cue__caret:nth-child(5) {
+  --peak: 0.15;
+  animation-delay: 0.52s;
+}
+
+@keyframes caret-ripple {
+  0%,
+  70%,
+  100% {
+    opacity: 0.16;
   }
-  to {
-    transform: translateY(100%);
+  35% {
+    opacity: var(--peak, 1);
   }
 }
 
-/* Too tight to hang past the edge on short screens. */
+/* Pull the stack in a touch on short screens so it still spills the seam. */
 @media (max-height: 700px) {
   .cue {
-    bottom: -32px;
-    height: 88px;
+    bottom: -24px;
+    gap: 5px;
   }
 }
 
@@ -897,7 +920,6 @@ body:has(.snap-page) .footer {
 
 /* ---------- Visit ---------- */
 .visit {
-  border-top: 1px solid var(--line);
   text-align: center;
 }
 
@@ -921,7 +943,6 @@ body:has(.snap-page) .footer {
 /* ---------- CTA band ---------- */
 .cta {
   text-align: center;
-  border-top: 1px solid var(--line);
 }
 
 .cta h2 {
@@ -932,11 +953,32 @@ body:has(.snap-page) .footer {
 /* ---------- About barbers ----------
    Each barber is a centred panel so the page reads in the same typographic
    language as the home page. */
+/* Three barbers side by side on a single panel. */
+.barbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: stretch;
+}
+
 .barber {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+/* Push the book button to a shared baseline so columns line up regardless
+   of bio length. */
+.barber .btn {
+  margin-top: auto;
+}
+
+@media (max-width: 780px) {
+  .barbers {
+    grid-template-columns: 1fr;
+    gap: clamp(48px, 10vw, 72px);
+  }
 }
 
 .barber__media {
@@ -971,13 +1013,96 @@ body:has(.snap-page) .footer {
 }
 
 .barber h2 {
-  font-size: clamp(26px, 3.6vw, 44px);
-  margin-bottom: 24px;
+  font-size: clamp(24px, 2.4vw, 34px);
+  margin-bottom: 20px;
 }
 
 .barber .lead {
+  font-size: clamp(15px, 1.1vw, 17px);
   margin: 0 auto 32px;
-  max-width: 52ch;
+  max-width: 34ch;
+}
+
+/* ---------- About copy block ----------
+   Left half: the blurb as uniform body copy flowing across two columns.
+   Right half: the wordmark sign-off, the one thing set apart. */
+.about-copy__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+}
+
+.about-copy .eyebrow {
+  margin-bottom: clamp(18px, 2.4vh, 28px);
+}
+
+/* Blurb flows across two equal-width columns — down the first, then the
+   second. All blurb text shares the plain body treatment. */
+.about-copy__cols {
+  columns: 2;
+  column-gap: clamp(20px, 2.4vw, 40px);
+  color: rgba(243, 239, 230, 0.8);
+  font-size: clamp(17px, 1.55vw, 21px);
+  line-height: 1.6;
+}
+
+.about-copy__cols p {
+  margin: 0 0 1em;
+}
+
+.about-copy__cols p:last-child {
+  margin-bottom: 0;
+}
+
+/* Sign-off sits in the right half: wordmark stacked over its tagline. */
+.about-copy__sign {
+  margin: 0;
+}
+
+.about-copy__mark {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 1;
+}
+
+.about-copy__tagline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+  margin-top: clamp(12px, 1.6vh, 20px);
+}
+
+.about-copy__sep {
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.about-copy__tag {
+  color: var(--muted);
+  font-size: clamp(15px, 1.7vw, 22px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Stack the halves on narrow screens, and drop the blurb to one column. */
+@media (max-width: 780px) {
+  .about-copy__inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .about-copy__cols {
+    columns: 1;
+  }
 }
 
 /* ---------- Shop / Building page ---------- */
@@ -1074,6 +1199,11 @@ body:has(.snap-page) .footer {
   .hero__lead,
   .cue {
     opacity: 1;
+  }
+
+  /* No ripple to carry brightness, so hold the carets at a readable level. */
+  .cue__caret {
+    opacity: 0.65;
   }
 
   .viewer__stage img {

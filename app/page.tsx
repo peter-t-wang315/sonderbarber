@@ -11,14 +11,14 @@ export default function Home() {
           <div className="aura" />
         </div>
         <div className="container hero__inner">
-          <p className="eyebrow hero__eyebrow">Toronto · Est. 2024</p>
+          <p className="eyebrow hero__eyebrow">Pullman · Est. 2026</p>
 
           <h1>
             <span className="mask" style={{ "--d": "0.12s" }}>
-              <span>Sharp</span>
+              <span>Own Lane</span>
             </span>
             <span className="mask" style={{ "--d": "0.24s" }}>
-              <span>by design</span>
+              <span>Own Pace</span>
             </span>
           </h1>
 
@@ -39,7 +39,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="cue" aria-hidden="true" />
+        <div className="cue" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
       </section>
 
       {/* SERVICES */}
@@ -52,7 +58,13 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <div className="cue cue--quick" aria-hidden="true" />
+        <div className="cue cue--quick" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
       </section>
 
       {/* VISIT */}

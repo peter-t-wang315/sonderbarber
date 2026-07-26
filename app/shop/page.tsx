@@ -18,14 +18,12 @@ export default function Shop() {
           <h1 className="building__word">
             <span className="mask" style={{ "--d": "0.12s" }}>
               <span>
-                Building<span className="dots">…</span>
+                Coming Soon<span className="dots">…</span>
               </span>
             </span>
           </h1>
 
           <div className="hero__rule" />
-
-          <p className="lead hero__lead">Grooming goods · Dropping soon</p>
         </div>
       </section>
     </div>

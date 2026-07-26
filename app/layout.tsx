@@ -4,6 +4,7 @@ import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 // Inter carries body copy, labels and buttons.
 const inter = Inter({
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        <ScrollToTop />
         <Nav />
         <main>{children}</main>
         <Footer />

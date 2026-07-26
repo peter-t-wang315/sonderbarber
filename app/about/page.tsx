@@ -35,39 +35,86 @@ export default function About() {
           </p>
         </div>
 
-        <div className="cue" aria-hidden="true" />
+        <div className="cue" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
       </section>
 
-      {/* BARBERS — one panel each */}
-      {BARBERS.map((b) => (
-        <section className="section snap" key={b.name}>
-          <Reveal className="container barber">
-            <div className="barber__media reveal-item">
-              <img src={b.image} alt={`${b.name}, barber at SONDER`} />
+      {/* BARBERS — three columns on one panel */}
+      <section className="section snap">
+        <Reveal className="container barbers">
+          {BARBERS.map((b, i) => (
+            <div className="barber reveal-item" key={b.name} style={{ "--i": i }}>
+              <div className="barber__media">
+                <img src={b.image} alt={`${b.name}, barber at SONDER`} />
+              </div>
+              <p className="barber__role">{b.role}</p>
+              <h2>{b.name}</h2>
+              <p className="lead">{b.bio}</p>
+              <a
+                className="btn btn--ghost"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book with {b.name.split(" ")[0]}
+              </a>
             </div>
-            <p className="barber__role reveal-item" style={{ "--i": 1 }}>
-              {b.role}
-            </p>
-            <h2 className="reveal-item" style={{ "--i": 2 }}>
-              {b.name}
-            </h2>
-            <p className="lead reveal-item" style={{ "--i": 3 }}>
-              {b.bio}
-            </p>
-            <a
-              className="btn btn--ghost reveal-item"
-              style={{ "--i": 4 }}
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Book with {b.name.split(" ")[0]}
-            </a>
-          </Reveal>
+          ))}
+        </Reveal>
 
-          <div className="cue cue--quick" aria-hidden="true" />
-        </section>
-      ))}
+        <div className="cue cue--quick" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
+      </section>
+
+      {/* ABOUT COPY */}
+      <section className="section snap about-copy">
+        <Reveal className="container about-copy__inner">
+          <div className="about-copy__blurb reveal-item">
+            <p className="eyebrow">The craft</p>
+            <div className="about-copy__cols">
+              <p>
+                Located in the heart of Pullman, Washington, our state-of-the-art
+                facility combines modern innovation with the timeless craft of
+                barbering.
+              </p>
+              <p>
+                We deliberately choose quality over quantity. We don&apos;t rush,
+                and we don&apos;t cut corners. Every service is a dedicated,
+                meticulous experience tailored entirely to you, ensuring you leave
+                the chair looking and feeling your absolute best.
+              </p>
+            </div>
+          </div>
+
+          <p className="about-copy__sign reveal-item" style={{ "--i": 1 }}>
+            <span className="about-copy__mark">SONDER</span>
+            <span className="about-copy__tagline">
+              <span className="about-copy__sep" aria-hidden="true">
+                |
+              </span>
+              <span className="about-copy__tag">Own lane. Own pace.</span>
+            </span>
+          </p>
+        </Reveal>
+
+        <div className="cue cue--quick" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="section snap cta">

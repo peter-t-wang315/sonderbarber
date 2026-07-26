@@ -53,24 +53,24 @@ export type Barber = {
 
 export const BARBERS: Barber[] = [
   {
-    name: "Marcus Vale",
-    role: "Founder · Master Barber",
+    name: "Dre Alvarez",
+    role: "Founder",
     bio: "Fifteen years behind the chair and a fade that could cut glass. Marcus opened SONDER to build the room he always wanted to work in — quiet lights, loud confidence, and zero rushed cuts.",
     image:
       "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
   },
-  {
-    name: "Dro Sanchez",
-    role: "Senior Barber · Texture & Curls",
-    bio: "Dro treats every head like a sculpture. Specialising in textured crops, curly tapers, and the kind of line-up you check three times in the mirror on the way out.",
-    image:
-      "https://images.unsplash.com/photo-1521490878406-4864b3f70a8c?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    name: "Theo Kane",
-    role: "Barber · Classic & Beard",
-    bio: "Old-school scissor work meets new-wave detailing. Theo lives for a clean beard sculpt and a timeless side part — hot towel included, always.",
-    image:
-      "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=80",
-  },
+  // {
+  //   name: "Dro Sanchez",
+  //   role: "Senior Barber · Texture & Curls",
+  //   bio: "Dro treats every head like a sculpture. Specialising in textured crops, curly tapers, and the kind of line-up you check three times in the mirror on the way out.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1521490878406-4864b3f70a8c?auto=format&fit=crop&w=900&q=80",
+  // },
+  // {
+  //   name: "Theo Kane",
+  //   role: "Barber · Classic & Beard",
+  //   bio: "Old-school scissor work meets new-wave detailing. Theo lives for a clean beard sculpt and a timeless side part — hot towel included, always.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=80",
+  // },
 ];
