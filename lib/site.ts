@@ -4,10 +4,17 @@ export const BOOKING_URL = "https://sonderbarbers.setmore.com/";
 
 export const SITE = {
   name: "SONDER",
-  tagline: "A modern barbershop.",
-  location: "Toronto, ON",
-  email: "hello@sonderbarber.com",
-  instagram: "https://instagram.com",
+  tagline: "Own Lane Own Pace",
+  address: "725 South Grand Ave.",
+  location: "Pullman, WA",
+  email: "sonderbarbers@gmail.com",
+  instagram: "https://www.instagram.com/sonderbarbers/",
+  // Opening hours, one entry per day-range. Rendered in the home Visit
+  // section and the footer.
+  hours: [
+    { days: "Mon – Fri", time: "8am – 6pm" },
+    { days: "Sat", time: "8am – 4pm" },
+  ],
 };
 
 export type NavLink = { href: string; label: string };

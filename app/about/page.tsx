@@ -1,6 +1,7 @@
 import { BARBERS, BOOKING_URL } from "@/lib/site";
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import BarbersGrid from "@/components/BarbersGrid";
 
 export const metadata: Metadata = {
   title: "About — SONDER",
@@ -8,7 +9,28 @@ export const metadata: Metadata = {
     "Meet the barbers behind SONDER — a modern Toronto barbershop built on craft, patience and swagger.",
 };
 
+// Small number → word map so the intro reads "one room, three chairs" rather
+// than "3 chairs". Falls back to the numeral past the table.
+const NUM_WORDS = [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+  "eleven",
+  "twelve",
+];
+
 export default function About() {
+  const chairs = BARBERS.length;
+  const chairsWord = NUM_WORDS[chairs] ?? String(chairs);
+
   return (
     <div className="snap-page">
       {/* INTRO */}
@@ -21,17 +43,18 @@ export default function About() {
 
           <h1>
             <span className="mask" style={{ "--d": "0.12s" }}>
-              <span>The people</span>
+              <span>Meet the</span>
             </span>
             <span className="mask" style={{ "--d": "0.24s" }}>
-              <span>behind the chair</span>
+              <span>artists</span>
             </span>
           </h1>
 
           <div className="hero__rule" />
 
           <p className="lead hero__lead">
-            One room, three chairs, and a shared obsession with getting it right.
+            One room, {chairsWord} {chairs === 1 ? "chair" : "chairs"}, and a
+            shared obsession with getting it right.
           </p>
         </div>
 
@@ -44,28 +67,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* BARBERS — three columns on one panel */}
+      {/* BARBERS — grid of up to three, with arrows to page through more */}
       <section className="section snap">
-        <Reveal className="container barbers">
-          {BARBERS.map((b, i) => (
-            <div className="barber reveal-item" key={b.name} style={{ "--i": i }}>
-              <div className="barber__media">
-                <img src={b.image} alt={`${b.name}, barber at SONDER`} />
-              </div>
-              <p className="barber__role">{b.role}</p>
-              <h2>{b.name}</h2>
-              <p className="lead">{b.bio}</p>
-              <a
-                className="btn btn--ghost"
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Book with {b.name.split(" ")[0]}
-              </a>
-            </div>
-          ))}
-        </Reveal>
+        <BarbersGrid />
 
         <div className="cue cue--quick" aria-hidden="true">
           <span className="cue__caret" />
@@ -83,21 +87,26 @@ export default function About() {
             <p className="eyebrow">The craft</p>
             <div className="about-copy__cols">
               <p>
-                Located in the heart of Pullman, Washington, our state-of-the-art
-                facility combines modern innovation with the timeless craft of
-                barbering.
+                Located in the heart of Pullman, Washington, our
+                state-of-the-art facility combines modern innovation with the
+                timeless craft of barbering.
               </p>
               <p>
-                We deliberately choose quality over quantity. We don&apos;t rush,
-                and we don&apos;t cut corners. Every service is a dedicated,
-                meticulous experience tailored entirely to you, ensuring you leave
-                the chair looking and feeling your absolute best.
+                We deliberately choose quality over quantity. We don&apos;t
+                rush, and we don&apos;t cut corners. Every service is a
+                dedicated, meticulous experience tailored entirely to you,
+                ensuring you leave the chair looking and feeling your absolute
+                best.
               </p>
             </div>
           </div>
 
           <p className="about-copy__sign reveal-item" style={{ "--i": 1 }}>
-            <span className="about-copy__mark">SONDER</span>
+            <img
+              className="about-copy__mark"
+              src="/sonderlogo-black.png"
+              alt="SONDER"
+            />
             <span className="about-copy__tagline">
               <span className="about-copy__sep" aria-hidden="true">
                 |

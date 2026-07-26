@@ -72,13 +72,16 @@ export default function Home() {
         <Reveal className="container visit__inner">
           <div className="reveal-item">
             <p className="eyebrow">Visit</p>
-            <p className="visit__line">128 Ossington Ave</p>
+            <p className="visit__line">{SITE.address}</p>
             <p className="visit__line muted">{SITE.location}</p>
           </div>
           <div className="reveal-item" style={{ "--i": 1 }}>
             <p className="eyebrow">Hours</p>
-            <p className="visit__line">Tuesday — Sunday</p>
-            <p className="visit__line muted">10am — 8pm</p>
+            {SITE.hours.map((h) => (
+              <p className="visit__line" key={h.days}>
+                {h.days} <span className="muted">{h.time}</span>
+              </p>
+            ))}
           </div>
           <div className="reveal-item" style={{ "--i": 2 }}>
             <p className="eyebrow">Book</p>
