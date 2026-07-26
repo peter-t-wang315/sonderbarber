@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Shop — SONDER",
-  description: "The SONDER shop is on its way. Grooming goods, coming soon.",
+  title: "Shop",
+  description:
+    "The SONDER shop is on its way — grooming goods from Pullman, WA's modern men's barbershop. Coming soon.",
 };
 
 export default function Shop() {

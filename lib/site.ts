@@ -7,6 +7,7 @@ export const SITE = {
   tagline: "Own Lane Own Pace",
   address: "725 South Grand Ave.",
   location: "Pullman, WA",
+  phone: "+1 208-751-9176",
   email: "sonderbarbers@gmail.com",
   instagram: "https://www.instagram.com/sonderbarbers/",
   // Opening hours, one entry per day-range. Rendered in the home Visit
@@ -85,7 +86,7 @@ export const BARBERS: Barber[] = [
   {
     name: "Dre Alvarez",
     role: "Founder",
-    bio: "Fifteen years behind the chair and a fade that could cut glass. Marcus opened SONDER to build the room he always wanted to work in — quiet lights, loud confidence, and zero rushed cuts.",
+    bio: "Barbering is my canvas. Fueled by art, culture, and the art of self-expression—bringing West Coast style and precision cuts to Pullman, WA.",
     image:
       "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80",
   },

@@ -4,9 +4,9 @@ import Reveal from "@/components/Reveal";
 import BarbersGrid from "@/components/BarbersGrid";
 
 export const metadata: Metadata = {
-  title: "About — SONDER",
+  title: "About",
   description:
-    "Meet the barbers behind SONDER — a modern Toronto barbershop built on craft, patience and swagger.",
+    "Meet the barbers behind SONDER — a modern men's barbershop in Pullman, WA built on craft, patience, and swagger.",
 };
 
 // Small number → word map so the intro reads "one room, three chairs" rather

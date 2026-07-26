@@ -36,6 +36,9 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* Kill the rubber-band overscroll so the hero can't be dragged past the top
+     before snapping back. */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -44,6 +47,7 @@ body {
   font-family: var(--font);
   font-weight: 400;
   line-height: 1.55;
+  overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

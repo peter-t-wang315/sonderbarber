@@ -5,6 +5,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import { SITE, BOOKING_URL } from "@/lib/site";
 
 // Inter carries body copy, labels and buttons.
 const inter = Inter({
@@ -38,9 +39,110 @@ const display = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "SONDER — A Modern Barbershop",
+  // TODO: point this at the real production domain once it's live — it makes
+  // canonical and Open Graph URLs absolute.
+  metadataBase: new URL("https://sonderbarbers.com"),
+  title: {
+    default: "SONDER — Own Lane Own Pace",
+    template: "%s — SONDER Barbershop | Pullman, WA",
+  },
   description:
-    "SONDER is a modern barbershop. Clean fades, sharp lines, and a room with swagger. Book your chair.",
+    "SONDER is a modern men's barbershop in Pullman, WA. Clean fades, sharp lineups, beard trims, and classic cuts. Book your chair with Pullman's premier barbers.",
+  keywords: [
+    "barbershop Pullman WA",
+    "barber Pullman WA",
+    "barbers in Pullman WA",
+    "men's haircut Pullman",
+    "mens barbershop Pullman Washington",
+    "fades Pullman",
+    "beard trim Pullman WA",
+    "Pullman barber shop",
+    "haircut near me Pullman",
+    "WSU barber",
+    "SONDER barbers",
+  ],
+  applicationName: "SONDER Barbershop",
+  category: "Barbershop",
+  authors: [{ name: "SONDER Barbershop" }],
+  creator: "SONDER Barbershop",
+  publisher: "SONDER Barbershop",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "SONDER Barbershop",
+    title: "SONDER — Modern Men's Barbershop in Pullman, WA",
+    description:
+      "A modern men's barbershop in Pullman, WA. Clean fades, sharp lineups, beard trims, and classic cuts. Book your chair.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SONDER — Modern Men's Barbershop in Pullman, WA",
+    description:
+      "A modern men's barbershop in Pullman, WA. Clean fades, sharp lineups, and classic cuts. Book your chair.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  // Local-search geo hints.
+  other: {
+    "geo.region": "US-WA",
+    "geo.placename": "Pullman",
+  },
+};
+
+// LocalBusiness structured data — the strongest on-page signal for local
+// search ("barbers in Pullman WA"). Google reads this to place the shop on
+// Maps / local packs. Keep the facts in sync with lib/site.ts.
+const businessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  name: SITE.name,
+  description:
+    "A modern men's barbershop in Pullman, WA offering clean fades, sharp lineups, beard trims, and classic cuts.",
+  url: "https://sonderbarbers.com",
+  image: "https://sonderbarbers.com/sonderlogo.png",
+  telephone: SITE.phone,
+  email: SITE.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address,
+    addressLocality: "Pullman",
+    addressRegion: "WA",
+    postalCode: "99163",
+    addressCountry: "US",
+  },
+  areaServed: "Pullman, WA",
+  priceRange: "$$",
+  sameAs: [SITE.instagram],
+  hasMap: "https://maps.google.com/?q=SONDER+Barbershop+Pullman+WA",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "08:00",
+      closes: "16:00",
+    },
+  ],
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: BOOKING_URL,
+    name: "Book a chair",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -55,6 +157,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          // Structured data must be raw JSON in the DOM, hence dangerouslySet.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+        />
         <ScrollToTop />
         <Nav />
         <main>{children}</main>
