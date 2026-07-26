@@ -35,7 +35,7 @@ export default function Nav() {
     <header className={`nav${open ? " is-open" : ""}`}>
       <div className="container nav__inner">
         <Link href="/" className="nav__brand" aria-label="SONDER home">
-          SONDER<sup>®</sup>
+          <img className="nav__logo" src="/sonderlogo-black.png" alt="SONDER" />
         </Link>
 
         <nav className="nav__links" aria-label="Primary">
@@ -57,12 +57,7 @@ export default function Nav() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {/* Two stacked copies: the first slides up and out, the second
-                follows it in, so the label rolls over on hover. */}
-            <span className="nav__book-roll">
-              <span>Book Now</span>
-              <span aria-hidden="true">Book Now</span>
-            </span>
+            Book Now
           </a>
 
           {/* Three bars that fold into an X while the panel is open. */}

@@ -1,17 +1,24 @@
 :root {
-  --black: #0a0a0a;
-  --black-soft: #121212;
-  --black-panel: #161616;
-  --off-white: #f3efe6;
-  --muted: #8a857c;
-  --line: rgba(243, 239, 230, 0.12);
-  --line-soft: rgba(243, 239, 230, 0.07);
+  /* Light theme. The names are historical: --black is the page BASE (now a
+     warm paper white) and --off-white is the INK (now near-black). They're
+     used in inverse roles across the sheet — e.g. a solid button paints
+     var(--off-white) as its fill with var(--black) text — so keeping those
+     relationships intact while swapping the two values flips the whole
+     two-tone scheme cleanly. */
+  --black: #f7f4ee;
+  --black-soft: #efebe3;
+  --black-panel: #e9e4da;
+  --off-white: #111111;
+  --muted: #6f6a60;
+  --line: rgba(10, 10, 10, 0.12);
+  --line-soft: rgba(10, 10, 10, 0.07);
 
-  --font: var(--font-inter), system-ui, -apple-system, "Helvetica Neue", Arial,
+  --font:
+    var(--font-inter), system-ui, -apple-system, "Helvetica Neue", Arial,
     sans-serif;
   /* Display face for the wordmark and headlines — see app/layout.js. */
-  --font-head: var(--font-display), var(--font-inter), "Helvetica Neue", Arial,
-    sans-serif;
+  --font-head:
+    var(--font-display), var(--font-inter), "Helvetica Neue", Arial, sans-serif;
 
   --maxw: 1240px;
   --pad: clamp(20px, 5vw, 64px);
@@ -29,6 +36,9 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* Kill the rubber-band overscroll so the hero can't be dragged past the top
+     before snapping back. */
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -37,6 +47,7 @@ body {
   font-family: var(--font);
   font-weight: 400;
   line-height: 1.55;
+  overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -119,7 +130,7 @@ p {
 
 .lead {
   font-size: clamp(16px, 1.7vw, 20px);
-  color: rgba(243, 239, 230, 0.8);
+  color: rgba(10, 10, 10, 0.8);
   max-width: 56ch;
 }
 
@@ -142,7 +153,9 @@ p {
   padding: 16px 30px;
   border-radius: 999px;
   border: 1px solid var(--off-white);
-  transition: color 0.4s ease, transform 0.25s ease;
+  transition:
+    color 0.4s ease,
+    transform 0.25s ease;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -197,7 +210,7 @@ p {
   top: 0;
   z-index: 50;
   backdrop-filter: blur(14px);
-  background: rgba(10, 10, 10, 0.72);
+  background: rgba(243, 239, 230, 0.72);
   border-bottom: 1px solid var(--line-soft);
 }
 
@@ -209,22 +222,15 @@ p {
 }
 
 .nav__brand {
-  font-family: var(--font-head);
-  font-size: 20px;
-  font-weight: 900;
-  font-stretch: 125%;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
-.nav__brand sup {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0;
-  margin-left: 2px;
-  top: 0.2em;
+/* Wordmark logo (black, on the light nav). Height-driven so the aspect ratio
+   is preserved; the source is a tight-trimmed PNG. */
+.nav__logo {
+  height: 18px;
+  width: auto;
 }
 
 .nav__links {
@@ -238,7 +244,7 @@ p {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgba(243, 239, 230, 0.72);
+  color: rgba(10, 10, 10, 0.72);
   transition: color 0.2s ease;
 }
 
@@ -289,33 +295,6 @@ p {
   transform: translateY(0);
 }
 
-/* Label roll: a viewport one line tall holding two stacked copies. */
-.nav__book-roll {
-  display: block;
-  position: relative;
-  height: 1.2em;
-  overflow: hidden;
-}
-
-.nav__book-roll span {
-  display: block;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav__book-roll span:last-child {
-  position: absolute;
-  inset: 0;
-  transform: translateY(100%);
-}
-
-.nav__book:hover .nav__book-roll span {
-  transform: translateY(-100%);
-}
-
-.nav__book:hover .nav__book-roll span:last-child {
-  transform: translateY(0);
-}
-
 /* Burger: three bars that fold into an X. Desktop never sees it. */
 .nav__burger {
   display: none;
@@ -334,7 +313,8 @@ p {
   width: 22px;
   height: 1.5px;
   background: var(--off-white);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.25s ease;
 }
 
@@ -362,7 +342,7 @@ p {
 .nav__panel {
   display: none;
   border-top: 1px solid var(--line-soft);
-  background: rgba(10, 10, 10, 0.96);
+  background: rgba(243, 239, 230, 0.96);
   backdrop-filter: blur(14px);
 }
 
@@ -379,7 +359,7 @@ p {
   font-stretch: 125%;
   letter-spacing: -0.005em;
   text-transform: uppercase;
-  color: rgba(243, 239, 230, 0.75);
+  color: rgba(10, 10, 10, 0.75);
   padding: 16px 0;
   border-bottom: 1px solid var(--line-soft);
   opacity: 0;
@@ -504,7 +484,8 @@ body:has(.snap-page) .footer {
 .reveal-item {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(var(--i, 0) * 75ms);
 }
@@ -514,7 +495,7 @@ body:has(.snap-page) .footer {
   transform: none;
 }
 
-/* ---------- Hero (black, centered) ---------- */
+/* ---------- Hero (paper, centered) ---------- */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -544,9 +525,9 @@ body:has(.snap-page) .footer {
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(243, 239, 230, 0.07) 0%,
-    rgba(243, 239, 230, 0.025) 38%,
-    rgba(243, 239, 230, 0) 68%
+    rgba(10, 10, 10, 0.07) 0%,
+    rgba(10, 10, 10, 0.025) 38%,
+    rgba(10, 10, 10, 0) 68%
   );
   animation: drift 26s ease-in-out infinite alternate;
   pointer-events: none;
@@ -596,7 +577,7 @@ body:has(.snap-page) .footer {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(243, 239, 230, 0.45),
+    rgba(10, 10, 10, 0.45),
     transparent
   );
   transform: scaleX(0);
@@ -637,7 +618,6 @@ body:has(.snap-page) .footer {
   transform: translateX(5px);
 }
 
-
 /* Sub-line under the rule on the About and Shop intro panels. */
 .hero__lead {
   margin: 0 auto;
@@ -646,24 +626,20 @@ body:has(.snap-page) .footer {
   animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.78s forwards;
 }
 
-/* Scroll cue: a hairline with a highlight travelling down it, on a loop.
-   It starts inside the panel and hangs past the bottom edge, so the line
-   carries the eye across the boundary into the next panel. */
+/* Scroll cue: five stacked down-carets with a highlight rippling through
+   them on a loop. The stack is anchored so three sit on the current panel and
+   the lowest two spill past the bottom edge onto the next panel, carrying the
+   eye across the boundary. */
 .cue {
   position: absolute;
-  bottom: -54px;
+  bottom: -30px;
   left: 50%;
   z-index: 4;
-  width: 1px;
-  height: 122px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   transform: translateX(-50%);
-  background: linear-gradient(
-    180deg,
-    rgba(243, 239, 230, 0.02),
-    rgba(243, 239, 230, 0.16) 45%,
-    rgba(243, 239, 230, 0.04)
-  );
-  overflow: hidden;
   opacity: 0;
   animation: fadeUp 1s ease 1.2s forwards;
   pointer-events: none;
@@ -674,33 +650,63 @@ body:has(.snap-page) .footer {
   animation-delay: 0.2s;
 }
 
-.cue::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    var(--off-white),
-    transparent
-  );
-  animation: travel 2.6s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+/* Each caret is a rotated square showing two borders — a clean chevron. */
+.cue__caret {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--off-white);
+  border-bottom: 2px solid var(--off-white);
+  transform: rotate(45deg);
+  /* Rest at a fixed fraction of this caret's peak, so a caret that glows
+     dimmer also starts dimmer — the glow keeps the same dramatic jump the
+     whole way down the stack. */
+  opacity: calc(var(--peak, 1) * 0.16);
+  /* The bright point ripples top → bottom, so motion reads downward. Each
+     caret's peak (--peak) steps down the stack, so the glow fades as it
+     descends toward the next panel. */
+  animation: caret-ripple 2.1s cubic-bezier(0.6, 0, 0.4, 1) infinite;
 }
 
-@keyframes travel {
-  from {
-    transform: translateY(-100%);
+.cue__caret:nth-child(1) {
+  --peak: 1;
+}
+
+.cue__caret:nth-child(2) {
+  --peak: 0.66;
+  animation-delay: 0.13s;
+}
+
+.cue__caret:nth-child(3) {
+  --peak: 0.42;
+  animation-delay: 0.26s;
+}
+
+.cue__caret:nth-child(4) {
+  --peak: 0.26;
+  animation-delay: 0.39s;
+}
+
+.cue__caret:nth-child(5) {
+  --peak: 0.15;
+  animation-delay: 0.52s;
+}
+
+@keyframes caret-ripple {
+  0%,
+  70%,
+  100% {
+    opacity: calc(var(--peak, 1) * 0.16);
   }
-  to {
-    transform: translateY(100%);
+  35% {
+    opacity: var(--peak, 1);
   }
 }
 
-/* Too tight to hang past the edge on short screens. */
+/* Pull the stack in a touch on short screens so it still spills the seam. */
 @media (max-height: 700px) {
   .cue {
-    bottom: -32px;
-    height: 88px;
+    bottom: -24px;
+    gap: 5px;
   }
 }
 
@@ -755,6 +761,13 @@ body:has(.snap-page) .footer {
   opacity: 1;
 }
 
+/* TEMPORARY (2026-07-26): the static cut photos show in full colour. The
+   grayscale filter above was for the monochrome placeholder frames — remove
+   this override when the turntable viewer is restored. */
+.viewer__stage img {
+  filter: none;
+}
+
 .viewer__hint {
   position: absolute;
   left: 50%;
@@ -764,13 +777,15 @@ body:has(.snap-page) .footer {
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(243, 239, 230, 0.75);
+  color: rgba(10, 10, 10, 0.75);
   padding: 8px 16px;
   border-radius: 999px;
-  background: rgba(10, 10, 10, 0.55);
+  background: rgba(243, 239, 230, 0.55);
   backdrop-filter: blur(6px);
   white-space: nowrap;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .viewer__hint.is-gone {
@@ -784,7 +799,7 @@ body:has(.snap-page) .footer {
   top: min(35vh, 360px);
   transform: translateY(-50%);
   z-index: 3;
-  background: rgba(10, 10, 10, 0.6);
+  background: rgba(243, 239, 230, 0.6);
   backdrop-filter: blur(6px);
 }
 
@@ -807,7 +822,9 @@ body:has(.snap-page) .footer {
   width: 26px;
   height: 1px;
   background: var(--line);
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
 }
 
 .viewer__ticks span.is-on {
@@ -848,7 +865,10 @@ body:has(.snap-page) .footer {
   color: var(--off-white);
   font-size: 15px;
   cursor: pointer;
-  transition: border-color 0.35s ease, background 0.35s ease, color 0.35s ease;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 .arrow span {
@@ -897,7 +917,6 @@ body:has(.snap-page) .footer {
 
 /* ---------- Visit ---------- */
 .visit {
-  border-top: 1px solid var(--line);
   text-align: center;
 }
 
@@ -921,7 +940,6 @@ body:has(.snap-page) .footer {
 /* ---------- CTA band ---------- */
 .cta {
   text-align: center;
-  border-top: 1px solid var(--line);
 }
 
 .cta h2 {
@@ -930,13 +948,51 @@ body:has(.snap-page) .footer {
 }
 
 /* ---------- About barbers ----------
-   Each barber is a centred panel so the page reads in the same typographic
-   language as the home page. */
+   Up to three barbers share the grid; more than three paginate behind the
+   prev/next arrows. */
+
+/* Carousel row: [ prev arrow ] [ grid ] [ next arrow ]. Arrows are omitted
+   entirely when there are three or fewer barbers. */
+.barbers-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.5vw, 32px);
+}
+
+.barbers__nav {
+  flex: none;
+}
+
+/* --cols is the number of barbers actually on screen (1–3); columns are
+   capped so a partial page stays centred instead of stretching wide. */
+.barbers {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 360px));
+  justify-content: center;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: stretch;
+}
+
 .barber {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+/* Push the book button to a shared baseline so columns line up regardless
+   of bio length. */
+.barber .btn {
+  margin-top: auto;
+}
+
+@media (max-width: 780px) {
+  .barbers {
+    grid-template-columns: minmax(0, 360px);
+    gap: clamp(48px, 10vw, 72px);
+  }
 }
 
 .barber__media {
@@ -953,7 +1009,9 @@ body:has(.snap-page) .footer {
   height: 100%;
   object-fit: cover;
   filter: grayscale(1) contrast(1.04) brightness(0.85);
-  transition: filter 0.8s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    filter 0.8s ease,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .barber:hover .barber__media img {
@@ -971,13 +1029,93 @@ body:has(.snap-page) .footer {
 }
 
 .barber h2 {
-  font-size: clamp(26px, 3.6vw, 44px);
-  margin-bottom: 24px;
+  font-size: clamp(24px, 2.4vw, 34px);
+  margin-bottom: 20px;
 }
 
 .barber .lead {
+  font-size: clamp(15px, 1.1vw, 17px);
   margin: 0 auto 32px;
-  max-width: 52ch;
+  max-width: 34ch;
+}
+
+/* ---------- About copy block ----------
+   Left half: the blurb as uniform body copy flowing across two columns.
+   Right half: the wordmark sign-off, the one thing set apart. */
+.about-copy__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+}
+
+.about-copy .eyebrow {
+  margin-bottom: clamp(18px, 2.4vh, 28px);
+}
+
+/* Blurb flows across two equal-width columns — down the first, then the
+   second. All blurb text shares the plain body treatment. */
+.about-copy__cols {
+  columns: 2;
+  column-gap: clamp(20px, 2.4vw, 40px);
+  color: rgba(10, 10, 10, 0.8);
+  font-size: clamp(17px, 1.55vw, 21px);
+  line-height: 1.6;
+}
+
+.about-copy__cols p {
+  margin: 0 0 1em;
+}
+
+.about-copy__cols p:last-child {
+  margin-bottom: 0;
+}
+
+/* Sign-off sits in the right half: wordmark stacked over its tagline. */
+.about-copy__sign {
+  margin: 0;
+}
+
+/* Wordmark logo replaces the text SONDER; height-driven to keep aspect. */
+.about-copy__mark {
+  display: block;
+  height: clamp(26px, 3.6vw, 50px);
+  width: auto;
+  max-width: 100%;
+}
+
+.about-copy__tagline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+  margin-top: clamp(12px, 1.6vh, 20px);
+}
+
+.about-copy__sep {
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.about-copy__tag {
+  color: var(--muted);
+  font-size: clamp(15px, 1.7vw, 22px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Stack the halves on narrow screens, and drop the blurb to one column. */
+@media (max-width: 780px) {
+  .about-copy__inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .about-copy__cols {
+    columns: 1;
+  }
 }
 
 /* ---------- Shop / Building page ---------- */
@@ -1000,13 +1138,11 @@ body:has(.snap-page) .footer {
   padding-bottom: 56px;
 }
 
+/* Wordmark logo replaces the text SONDER; height-driven to keep aspect. */
 .footer__brand {
-  font-size: clamp(42px, 8.5vw, 104px);
-  font-weight: 900;
-  font-stretch: 125%;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-  line-height: 0.9;
+  height: clamp(28px, 5vw, 60px);
+  width: auto;
+  max-width: 100%;
 }
 
 .footer__cols {
@@ -1028,13 +1164,24 @@ body:has(.snap-page) .footer {
 .footer__col p {
   display: block;
   font-size: 14px;
-  color: rgba(243, 239, 230, 0.78);
+  color: rgba(10, 10, 10, 0.78);
   margin: 0 0 10px;
   transition: color 0.2s ease;
 }
 
 .footer__col a:hover {
   color: var(--off-white);
+}
+
+/* Instagram glyph inherits the footer link colour (currentColor), so it's
+   monochrome and picks up the same hover as the text links. */
+.footer__social {
+  display: inline-flex;
+  margin-top: 4px;
+}
+
+.footer__social svg {
+  display: block;
 }
 
 .footer__bottom {
@@ -1076,12 +1223,13 @@ body:has(.snap-page) .footer {
     opacity: 1;
   }
 
-  .viewer__stage img {
-    transition-duration: 0.01ms;
+  /* No ripple to carry brightness, so hold the carets at a readable level. */
+  .cue__caret {
+    opacity: 0.65;
   }
 
-  .nav__book-roll span:last-child {
-    display: none;
+  .viewer__stage img {
+    transition-duration: 0.01ms;
   }
 
   .hero__rule {

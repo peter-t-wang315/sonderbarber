@@ -11,14 +11,14 @@ export default function Home() {
           <div className="aura" />
         </div>
         <div className="container hero__inner">
-          <p className="eyebrow hero__eyebrow">Toronto · Est. 2024</p>
+          <p className="eyebrow hero__eyebrow">Pullman · Est. 2026</p>
 
           <h1>
             <span className="mask" style={{ "--d": "0.12s" }}>
-              <span>Sharp</span>
+              <span>Own Lane</span>
             </span>
             <span className="mask" style={{ "--d": "0.24s" }}>
-              <span>by design</span>
+              <span>Own Pace</span>
             </span>
           </h1>
 
@@ -39,7 +39,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="cue" aria-hidden="true" />
+        <div className="cue" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
       </section>
 
       {/* SERVICES */}
@@ -52,7 +58,13 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <div className="cue cue--quick" aria-hidden="true" />
+        <div className="cue cue--quick" aria-hidden="true">
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+          <span className="cue__caret" />
+        </div>
       </section>
 
       {/* VISIT */}
@@ -60,13 +72,16 @@ export default function Home() {
         <Reveal className="container visit__inner">
           <div className="reveal-item">
             <p className="eyebrow">Visit</p>
-            <p className="visit__line">128 Ossington Ave</p>
+            <p className="visit__line">{SITE.address}</p>
             <p className="visit__line muted">{SITE.location}</p>
           </div>
           <div className="reveal-item" style={{ "--i": 1 }}>
             <p className="eyebrow">Hours</p>
-            <p className="visit__line">Tuesday — Sunday</p>
-            <p className="visit__line muted">10am — 8pm</p>
+            {SITE.hours.map((h) => (
+              <p className="visit__line" key={h.days}>
+                {h.days} <span className="muted">{h.time}</span>
+              </p>
+            ))}
           </div>
           <div className="reveal-item" style={{ "--i": 2 }}>
             <p className="eyebrow">Book</p>
