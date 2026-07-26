@@ -778,6 +778,13 @@ body:has(.snap-page) .footer {
   opacity: 1;
 }
 
+/* TEMPORARY (2026-07-26): the static cut photos show in full colour. The
+   grayscale filter above was for the monochrome placeholder frames — remove
+   this override when the turntable viewer is restored. */
+.viewer__stage img {
+  filter: none;
+}
+
 .viewer__hint {
   position: absolute;
   left: 50%;

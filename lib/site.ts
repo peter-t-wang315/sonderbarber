@@ -18,7 +18,29 @@ export const NAV_LINKS: NavLink[] = [
   { href: "/shop", label: "Shop" },
 ];
 
-// Service menu, shown as the turntable viewer on the home page.
+// Service menu, shown in the cut viewer on the home page.
+//
+// ─── TEMPORARY: STATIC PHOTOS (changed 2026-07-26) ──────────────────────────
+// We don't have panoramic / turntable photography yet — only a single static
+// photo per cut, dropped into public/haircuts/. So each Service is now just a
+// { title, image } pair and CutViewer shows one photo + its name (no rotation,
+// no price). See components/CutViewer.tsx for the matching static viewer.
+//
+// WHEN THE PANORAMIC CUTS ARRIVE: restore the frames-based version preserved
+// in the commented block directly below (FRAME_COUNT + frames() helper +
+// the { title, price, frames } SERVICES array), and swap CutViewer back to the
+// turntable implementation preserved at the bottom of that file.
+export type Service = { title: string; image: string };
+
+export const SERVICES: Service[] = [
+  { title: "Blowout Taper", image: "/haircuts/blowout-taper.jpeg" },
+  { title: "Burst Fade", image: "/haircuts/burst-fade.jpeg" },
+  { title: "Mullet", image: "/haircuts/mullet.jpeg" },
+  { title: "Skin Fade", image: "/haircuts/skin-fade.jpeg" },
+  { title: "Taper Fade", image: "/haircuts/taper-fade.jpeg" },
+];
+
+// ─── ORIGINAL TURNTABLE DATA — restore when panoramic frames are available ──
 //
 // `frames` is an ordered rotation: one image per angle, left profile (-90°)
 // through front (0°) to right profile (+90°). The files under public/frames
@@ -27,21 +49,22 @@ export const NAV_LINKS: NavLink[] = [
 // head (same subject, same lighting, camera stepped around it) and the scrub
 // becomes a true rotation. Frame count is read from the array, so shooting 12
 // angles instead of 7 needs no code change.
-const FRAME_COUNT = 7;
-
-const frames = (slug: string) =>
-  Array.from({ length: FRAME_COUNT }, (_, i) => `/frames/${slug}/${i + 1}.svg`);
-
-export type Service = { title: string; price: string; frames: string[] };
-
-export const SERVICES: Service[] = [
-  { title: "Signature Cut", price: "$55", frames: frames("signature-cut") },
-  { title: "Skin Fade", price: "$60", frames: frames("skin-fade") },
-  { title: "Beard Sculpt", price: "$35", frames: frames("beard-sculpt") },
-  { title: "Cut & Beard", price: "$80", frames: frames("cut-beard") },
-  { title: "Head Shave", price: "$45", frames: frames("head-shave") },
-  { title: "The Kids' Chair", price: "$30", frames: frames("kids-chair") },
-];
+//
+// const FRAME_COUNT = 7;
+//
+// const frames = (slug: string) =>
+//   Array.from({ length: FRAME_COUNT }, (_, i) => `/frames/${slug}/${i + 1}.svg`);
+//
+// export type Service = { title: string; price: string; frames: string[] };
+//
+// export const SERVICES: Service[] = [
+//   { title: "Signature Cut", price: "$55", frames: frames("signature-cut") },
+//   { title: "Skin Fade", price: "$60", frames: frames("skin-fade") },
+//   { title: "Beard Sculpt", price: "$35", frames: frames("beard-sculpt") },
+//   { title: "Cut & Beard", price: "$80", frames: frames("cut-beard") },
+//   { title: "Head Shave", price: "$45", frames: frames("head-shave") },
+//   { title: "The Kids' Chair", price: "$30", frames: frames("kids-chair") },
+// ];
 
 // Filler barber roster for the About page.
 export type Barber = {
