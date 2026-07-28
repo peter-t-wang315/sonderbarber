@@ -392,6 +392,12 @@ p {
     display: none;
   }
 
+  /* With the links gone, grid auto-placement would otherwise pull the CTA
+     into the now-empty middle column, right next to the logo. */
+  .nav__cta {
+    grid-column: 3;
+  }
+
   .nav__burger {
     display: block;
   }
